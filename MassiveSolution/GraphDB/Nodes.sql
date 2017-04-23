@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Nodes]
+(
+	[Id] INT NOT NULL, 
+    [Label] VARCHAR(16) NOT NULL
+	PRIMARY KEY CLUSTERED (Id)
+)
