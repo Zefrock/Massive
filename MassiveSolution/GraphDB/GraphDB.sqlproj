@@ -63,4 +63,7 @@
     <Build Include="Nodes.sql" />
     <Build Include="AdjacentNodes.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="GraphDB.refactorlog" />
+  </ItemGroup>
 </Project>
