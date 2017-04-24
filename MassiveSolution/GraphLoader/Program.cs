@@ -35,11 +35,16 @@ namespace GraphLoader
                 return;
             }
 
-            var graphLoader = new GraphLoader(graphFolder);
+            var folderLoader = new FolderLoader(graphFolder);
+            var files = folderLoader.GetNodeFiles();
 
-            graphLoader.LoadGraphFromFolder();
+            Graph graph = new Graph();
+            graph.Load(files);
 
-            graphLoader.SaveGraphToDB();
+            //Todo:
+            //use Automapper DTO to Model
+
+            //Clean DB and Save model to DB
         }
 
 
