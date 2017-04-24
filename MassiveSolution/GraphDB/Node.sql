@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Nodes]
+﻿CREATE TABLE [dbo].[Node]
 (
 	[NodeId] INT NOT NULL, 
     [Label] VARCHAR(16) NOT NULL

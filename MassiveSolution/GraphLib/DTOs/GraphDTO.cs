@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace GraphLoader
+namespace GraphLib.DTOs
 {
     [DataContract(Name = "Graph")]
     public class GraphDTO

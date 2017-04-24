@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GraphLib.Models
+namespace GraphLib.DBModel
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GraphDBDataEntities : DbContext
+    public partial class GraphDBContext : DbContext
     {
-        public GraphDBDataEntities()
-            : base("name=GraphDBDataEntities")
+        public GraphDBContext()
+            : base("name=GraphDBContext")
         {
         }
     
@@ -25,6 +25,7 @@ namespace GraphLib.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Nodes> Nodes { get; set; }
+        public virtual DbSet<AdjacentNode> AdjacentNodes { get; set; }
+        public virtual DbSet<Node> Nodes { get; set; }
     }
 }
