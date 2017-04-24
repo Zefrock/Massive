@@ -11,6 +11,10 @@ namespace GraphServices
 {
     public class Global : System.Web.HttpApplication
     {
+        /// <summary>
+        /// Castle windsor container together with WCF Facility allows for inline setup of Service Host
+        /// These configurations could be in a xml file, not necessary to prove knowledge of dependency injection concept
+        /// </summary>
         IWindsorContainer _container;
 
         protected void Application_Start(object sender, EventArgs e)
@@ -27,11 +31,13 @@ namespace GraphServices
                         .ImplementedBy<UnweightedGraph>()
                         .DependsOn(ServiceOverride.ForKey<ISerializer<GraphDTO>>().Eq("JSonSerializer")),
 
+                    //Domain object
                     Component
                         .For<ISerializer<GraphDTO>>()
                         .ImplementedBy<JSonSerializer<GraphDTO>>()
                         .Named("JSonSerializer"),
 
+                    //Service Api (management)
                     Component
                         .For<IGraphApi>()
                         .ImplementedBy<GraphApi>()
@@ -46,22 +52,36 @@ namespace GraphServices
                             .Hosted())
                         .IsDefault(),
 
+                    //Service Data (thin client)
                     Component
-                        .For<IGraphDataServices>()
-                        .ImplementedBy<GraphDataServices>()
+                        .For<IGraphData>()
+                        .ImplementedBy<GraphData>()
                         .AsWcfService(
                             new DefaultServiceModel()
                             .PublishMetadata(x => x.EnableHttpGet())
                             .AddEndpoints(
                                     WcfEndpoint
-                                        .ForContract<IGraphDataServices>()
+                                        .ForContract<IGraphData>()
                                         .BoundTo(new BasicHttpBinding())
-                                        .At("GraphDataServices"))
+                                        .At("GraphData"))
+                            .Hosted())
+                        .IsDefault(),
+
+                    //Service Domain (path algo)
+                    Component
+                        .For<IGraphDomain>()
+                        .ImplementedBy<GraphDomain>()
+                        .AsWcfService(
+                            new DefaultServiceModel()
+                            .PublishMetadata(x => x.EnableHttpGet())
+                            .AddEndpoints(
+                                    WcfEndpoint
+                                        .ForContract<IGraphDomain>()
+                                        .BoundTo(new BasicHttpBinding())
+                                        .At("GraphDomain"))
                             .Hosted())
                         .IsDefault()
                 );
-            /*
-             * .AddEndPoints(WcfEndpoint.ForContract<ISimpleService>().BoundTo(new BasicHttpBinding()).At("SimpleService"))));*/
         }
 
         protected void Session_Start(object sender, EventArgs e)

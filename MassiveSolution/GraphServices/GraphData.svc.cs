@@ -12,9 +12,9 @@ namespace GraphServices
     /// Service to support Loader
     /// </summary>
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class GraphDataServices : GraphServiceBase, IGraphDataServices
+    public class GraphData : GraphServiceBase, IGraphData
     {
-        public GraphDataServices(IGraph graph) : base(graph)
+        public GraphData(IGraph graph) : base(graph)
         {
         }
 

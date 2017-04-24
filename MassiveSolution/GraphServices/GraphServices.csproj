@@ -74,23 +74,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="GraphData.svc" />
+    <Content Include="GraphDomain.svc" />
     <Content Include="GraphApi.svc" />
-    <Content Include="GraphDataServices.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GraphData.svc.cs">
+      <DependentUpon>GraphData.svc</DependentUpon>
+    </Compile>
+    <Compile Include="GraphDomain.svc.cs">
+      <DependentUpon>GraphDomain.svc</DependentUpon>
+    </Compile>
     <Compile Include="GraphApi.svc.cs">
       <DependentUpon>GraphApi.svc</DependentUpon>
     </Compile>
     <Compile Include="GraphServiceBase.cs" />
     <Compile Include="IGraphApi.cs" />
-    <Compile Include="GraphDataServices.svc.cs">
-      <DependentUpon>GraphDataServices.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IGraphDataServices.cs" />
+    <Compile Include="IGraphData.cs" />
+    <Compile Include="IGraphDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

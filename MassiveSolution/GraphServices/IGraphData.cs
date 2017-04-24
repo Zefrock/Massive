@@ -4,7 +4,7 @@ using System.ServiceModel;
 namespace GraphServices
 {
     [ServiceContract(Namespace = "Massive")]
-    public interface IGraphDataServices
+    public interface IGraphData
     {
         [OperationContract]
         void LoadGraph(IEnumerable<string> graph);
