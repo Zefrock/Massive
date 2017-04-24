@@ -11,7 +11,7 @@ using System.ServiceModel.Web;
 namespace GraphServices
 {
     /// <summary>
-    /// Service to support loader
+    /// Service to support Thin Client
     /// </summary>
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class GraphApi : GraphServiceBase, IGraphApi

@@ -9,7 +9,7 @@ using System.ServiceModel.Web;
 namespace GraphServices
 {
     /// <summary>
-    /// Service to support thin Client
+    /// Service to support Loader
     /// </summary>
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class GraphDataServices : GraphServiceBase, IGraphDataServices
