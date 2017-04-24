@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphLib.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,14 +28,22 @@ namespace GraphLoader
             _folder = folder;
         }
 
-        public void Load()
+        public void LoadGraphFromFolder()
         {
             foreach (string file in Directory.EnumerateFiles(_folder, "*.xml"))
             {
                 string contents = File.ReadAllText(file);
+                //missing code to deserialize xml
             }
+        }
 
-            throw new NotImplementedException("Not mapping to entities yet");
+        public void SaveGraphToDB()
+        {
+            using (var context = new GraphDBDataEntities())
+            {
+                //missing code to map to db entities
+                context.SaveChanges();
+            }
         }
     }
 }

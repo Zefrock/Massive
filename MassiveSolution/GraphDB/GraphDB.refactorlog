@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="3dcd6a88-d81c-400e-9362-bd7ac21a1e27" ChangeDateTime="04/23/2017 22:46:54">
+    <Property Name="ElementName" Value="[dbo].[Nodes].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Nodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NodeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="70b1c7a4-9cd8-4917-ac1d-71f5ce952339" ChangeDateTime="04/23/2017 22:47:03">
+    <Property Name="ElementName" Value="[dbo].[AdjacentNodes].[IdNode1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AdjacentNodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NodeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0879edcd-bd3e-426f-a567-2c3960c6883c" ChangeDateTime="04/23/2017 22:47:15">
+    <Property Name="ElementName" Value="[dbo].[AdjacentNodes].[IdNode2]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AdjacentNodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AdjacentNodeId" />
+  </Operation>
+</Operations>
