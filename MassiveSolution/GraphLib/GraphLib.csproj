@@ -49,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Graph.cs" />
+    <Compile Include="DTOs\AdjacentNodesDTO.cs" />
+    <Compile Include="DTOs\GraphDTO.cs" />
+    <Compile Include="DTOs\NodeDTO.cs" />
     <Compile Include="Models\GraphModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
