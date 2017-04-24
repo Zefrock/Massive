@@ -5,6 +5,7 @@ using GraphLib.Domain;
 using GraphLib.Domain.Serializers;
 using GraphLib.DTOs;
 using System;
+using System.ServiceModel;
 
 namespace GraphServices
 {
@@ -34,15 +35,33 @@ namespace GraphServices
                     Component
                         .For<IGraphApi>()
                         .ImplementedBy<GraphApi>()
-                        .AsWcfService(new DefaultServiceModel().Hosted())
+                        .AsWcfService(
+                            new DefaultServiceModel()
+                            .PublishMetadata(x => x.EnableHttpGet())
+                            .AddEndpoints(
+                                    WcfEndpoint
+                                        .ForContract<IGraphApi>()
+                                        .BoundTo(new BasicHttpBinding())
+                                        .At("GraphApi"))
+                            .Hosted())
                         .IsDefault(),
 
                     Component
                         .For<IGraphDataServices>()
                         .ImplementedBy<GraphDataServices>()
-                        .AsWcfService(new DefaultServiceModel().Hosted())
+                        .AsWcfService(
+                            new DefaultServiceModel()
+                            .PublishMetadata(x => x.EnableHttpGet())
+                            .AddEndpoints(
+                                    WcfEndpoint
+                                        .ForContract<IGraphDataServices>()
+                                        .BoundTo(new BasicHttpBinding())
+                                        .At("GraphDataServices"))
+                            .Hosted())
                         .IsDefault()
                 );
+            /*
+             * .AddEndPoints(WcfEndpoint.ForContract<ISimpleService>().BoundTo(new BasicHttpBinding()).At("SimpleService"))));*/
         }
 
         protected void Session_Start(object sender, EventArgs e)
