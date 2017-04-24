@@ -75,7 +75,10 @@
     <Compile Include="DBModel\Node.cs">
       <DependentUpon>GraphDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Graph.cs" />
+    <Compile Include="Domain\Serializers\ISerializer.cs" />
+    <Compile Include="Domain\Serializers\JSonSerializer.cs" />
+    <Compile Include="Domain\UnweightedGraph.cs" />
+    <Compile Include="Domain\IGraph.cs" />
     <Compile Include="DTOs\AdjacentNodesDTO.cs" />
     <Compile Include="DTOs\GraphDTO.cs" />
     <Compile Include="DTOs\NodeDTO.cs" />

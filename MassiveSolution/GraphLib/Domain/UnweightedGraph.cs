@@ -12,22 +12,47 @@ using System.Linq;
 using System.Transactions;
 using System.Xml.Serialization;
 
-namespace GraphLoader
+namespace GraphLib.Domain
 {
-    public class Graph
+    public class UnweightedGraph : IGraph
     {
-        public GraphDTO GraphDTO { get; private set; }
+        public GraphDTO GraphIntance { get; private set; }
 
-        static Graph()
+        static UnweightedGraph()
         {
+            //Configures DTO <-> DB entity mapper on first initialization
+            //Should be in the ctor param, injected, will do if i get time 
             GraphMapper.Configure();
+        }
+
+        public UnweightedGraph(/*IMapper mapper, ISerializer serializer, IDataStore dataStore*/)
+        {
+        }
+
+        /// <summary>
+        /// Loads Graph from DB
+        /// </summary>
+        /// <returns></returns>
+        public GraphDTO LoadFromDB()
+        {
+            List<Node> dbNodes = null;
+
+            using (var context = new GraphDBContext())
+            {
+                dbNodes = context.Set<Node>().ToList();
+            }
+
+            List<NodeDTO> dtos = Mapper.Map<List<Node>, List<NodeDTO>>(dbNodes);
+            GraphIntance = new GraphDTO(dtos);
+
+            return GraphIntance;
         }
 
         /// <summary>
         /// Loads a new graph onto this instance, from an enumerable collection of strings each representing a serialized node
         /// </summary>
         /// <param name="nodes"></param>
-        public GraphDTO Load(IEnumerable<string> nodes)
+        public GraphDTO LoadFrom(IEnumerable<string> nodes)
         {
             List<NodeDTO> graphNodes = new List<NodeDTO>();
 
@@ -42,7 +67,7 @@ namespace GraphLoader
             }
 
             //Assuming it's ok to remove self referencing nodes
-            foreach(var node in graphNodes.Where(n => n.AdjacentNodes.Ids.Any(a => a == n.NodeId)))
+            foreach (var node in graphNodes.Where(n => n.AdjacentNodes.Ids.Any(a => a == n.NodeId)))
             {
                 node.AdjacentNodes.Ids.Remove(node.NodeId);
             }
@@ -57,9 +82,9 @@ namespace GraphLoader
             if (duplicates.Count() > 0)
                 throw new Exception($"Found duplicated node definitions for nodes with IDs : { duplicates.Select(g => g.Key.ToString()).Aggregate((a, b) => a + ", " + b)}");
 
-            GraphDTO = new GraphDTO(graphNodes);
+            GraphIntance = new GraphDTO(graphNodes);
 
-            return GraphDTO;
+            return GraphIntance;
         }
 
         /// <summary>
@@ -68,13 +93,13 @@ namespace GraphLoader
         public void Persist()
         {
             //Map DTOs to DB nodes
-            var dbNodes = Mapper.Map<List<NodeDTO>, List<Node>>(GraphDTO.Nodes);
+            var dbNodes = Mapper.Map<List<NodeDTO>, List<Node>>(GraphIntance.Nodes);
 
             using (var context = new GraphDBContext())
             {
                 context.Database.ExecuteSqlCommand("DELETE FROM Node");
-                
-                foreach(var node in dbNodes)
+
+                foreach (var node in dbNodes)
                 {
                     context.Nodes.Add(node);
                 }

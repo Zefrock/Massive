@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphLib.Domain;
+using System;
 using System.Configuration;
 using System.Threading.Tasks;
 
@@ -33,10 +34,10 @@ namespace GraphLoader
             }
 
             var folderLoader = new FolderLoader(graphFolder);
-            var files = folderLoader.GetNodeFiles();
+            var nodes = folderLoader.GetNodes();
 
-            Graph graph = new Graph();
-            graph.Load(files);
+            UnweightedGraph graph = new UnweightedGraph();
+            graph.LoadFrom (nodes);
             graph.Persist();
 
             Console.WriteLine("The new Graph has been persisted to the DB");
