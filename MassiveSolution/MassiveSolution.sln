@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLib", "GraphLib\GraphL
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GraphDB", "GraphDB\GraphDB.sqlproj", "{7C9AFFC3-F7CE-42BA-8F2A-4122305C21BA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8C8A756B-A204-4EA5-9B3B-F69F0746510C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLib.Tests", "GraphLib.Tests\GraphLib.Tests.csproj", "{7A45586A-7231-419E-B9AC-CEE3DEC1C181}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +33,15 @@ Global
 		{7C9AFFC3-F7CE-42BA-8F2A-4122305C21BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C9AFFC3-F7CE-42BA-8F2A-4122305C21BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C9AFFC3-F7CE-42BA-8F2A-4122305C21BA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7A45586A-7231-419E-B9AC-CEE3DEC1C181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A45586A-7231-419E-B9AC-CEE3DEC1C181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A45586A-7231-419E-B9AC-CEE3DEC1C181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A45586A-7231-419E-B9AC-CEE3DEC1C181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A45586A-7231-419E-B9AC-CEE3DEC1C181} = {8C8A756B-A204-4EA5-9B3B-F69F0746510C}
 	EndGlobalSection
 EndGlobal

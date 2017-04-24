@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GraphLoader
@@ -16,6 +12,7 @@ namespace GraphLoader
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandledExceptionHandler);
             TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(UnobservedTaskExceptionHandler);
+
         }
 
 
@@ -40,11 +37,9 @@ namespace GraphLoader
 
             Graph graph = new Graph();
             graph.Load(files);
+            graph.Persist();
 
-            //Todo:
-            //use Automapper DTO to Model
-
-            //Clean DB and Save model to DB
+            Console.WriteLine("The new Graph has been persisted to the DB");
         }
 
 
