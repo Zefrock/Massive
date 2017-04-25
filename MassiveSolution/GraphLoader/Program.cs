@@ -1,5 +1,11 @@
-﻿using System;
+﻿using Castle.Facilities.WcfIntegration;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using GraphLib.Domain;
+using GraphLoader.GraphServices;
+using System;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GraphLoader
@@ -7,14 +13,25 @@ namespace GraphLoader
     class Program
     {
         const string GraphFolderKeyName = "GraphFolder";
+        static IWindsorContainer _container ;
 
         static Program()
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandledExceptionHandler);
             TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(UnobservedTaskExceptionHandler);
 
-        }
+            //Defining Windsor container
+            _container = new WindsorContainer();
 
+            _container
+                .AddFacility<WcfFacility>()
+                .Register
+                (
+                    Component
+                        .For<IGraphData>()
+                        .AsWcfClient(WcfEndpoint.FromConfiguration("*"))
+                );
+        }
 
         static void Main(string[] args)
         {
@@ -32,16 +49,18 @@ namespace GraphLoader
                 return;
             }
 
+            //Load xml files from folder
             var folderLoader = new FolderLoader(graphFolder);
-            var files = folderLoader.GetNodeFiles();
+            var nodes = folderLoader.GetNodes().ToList();
 
-            Graph graph = new Graph();
-            graph.Load(files);
-            graph.Persist();
+            //Get service from container
+            IGraphData graphData = _container.Resolve<IGraphData>();
 
-            Console.WriteLine("The new Graph has been persisted to the DB");
+            //Load data onto the service
+            graphData.LoadGraph(nodes);
+
+            Console.WriteLine("The new Graph has been sent to the Data service");
         }
-
 
         private static void UnobservedTaskExceptionHandler(object sender, UnobservedTaskExceptionEventArgs e)
         {

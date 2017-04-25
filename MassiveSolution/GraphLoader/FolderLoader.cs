@@ -23,7 +23,7 @@ namespace GraphLoader
             _folder = folder;
         }
 
-        public IEnumerable<string> GetNodeFiles()
+        public IEnumerable<string> GetNodes()
         {
             foreach (var file in Directory.EnumerateFiles(_folder, "*.xml"))
             {
