@@ -19,3 +19,17 @@ Every flawless execution of the loader will reset the previous Graph data from D
 If no input data is found the graph is reset to 0 nodes.
 All adjacent nodes self references are removed from the graph.
 The loader will fail if it finds duplicated node definitions *(i.e. two definitions with the same node Id)* in which case any existing graph is preserved in the DB.
+The loader uses [DataManagent](http://localhost/GraphData.svc) service to load new graphs to the database 
+
+### Services
+Three services are spawned (adjust urls to assigned port when debugging)
+[API](http://localhost/GraphApi.svc)
+[DataManagent](http://localhost/GraphData.svc)
+[Domain](http://localhost/GraphDomain.svc) (Not implemented)
+
+### What is missing
+It's sad but I really couldn't not finish all tasks in the assignment.
+Left to finish are
+- Thin client, I would most likely try to use Argular2 and draw on canvas
+- Shortest path algo (I would most likely look at some algorithm for unweighted graphs and try to code it) Dijkstra's algorithm might be a start point.
+- Unit tests (add one using nunit, couldn't focus on it with the clock ticking)
