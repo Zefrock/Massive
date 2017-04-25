@@ -10,7 +10,7 @@ I have used SQL Express 2016, but should be fine with any SQL version above 2012
 
 ### Load Graph from Input Data
 The provided samples can be found under source control [Input Data](https://github.com/Zefrock/Massive/tree/master/InputData)
-The relative location is set on [GraphLoader's App.config](https://github.com/Zefrock/Massive/blob/master/MassiveSolution/GraphLoader/App.config) configuration file.
+The relative location is set on [GraphServices's Web.config](https://github.com/Zefrock/Massive/blob/master/MassiveSolution/GraphServices/Web.config) configuration file.
 Modify `GraphFolder` AppSetting key value to direct it to another location.
 
 ### Graph Loader
