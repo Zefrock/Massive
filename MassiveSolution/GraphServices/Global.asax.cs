@@ -25,13 +25,15 @@ namespace GraphServices
                 .AddFacility<WcfFacility>()
                 .Register
                 (
-                    // To allow declarations of other Setializers
+                    //Domain object : Graph initialized and loaded from DB
                     Component
                         .For<IGraph>()
                         .ImplementedBy<UnweightedGraph>()
-                        .DependsOn(ServiceOverride.ForKey<ISerializer<GraphDTO>>().Eq("JSonSerializer")),
+                        .DependsOn(ServiceOverride.ForKey<ISerializer<GraphDTO>>()
+                        .Eq("JSonSerializer"))
+                        .OnCreate(graph => graph.LoadFromDB()),
 
-                    //Domain object
+                    // Named, to allow declarations of other Setializers
                     Component
                         .For<ISerializer<GraphDTO>>()
                         .ImplementedBy<JSonSerializer<GraphDTO>>()

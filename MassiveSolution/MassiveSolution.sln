@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLoader", "GraphLoader\GraphLoader.csproj", "{902607D1-6FAD-4CC1-9B78-9D85E22A0CDA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7D7A025-A330-48C2-823D-E81C78B861E6} = {D7D7A025-A330-48C2-823D-E81C78B861E6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLib", "GraphLib\GraphLib.csproj", "{B443DB58-C5A8-4780-8CB7-E8018EFD8BD1}"
 EndProject

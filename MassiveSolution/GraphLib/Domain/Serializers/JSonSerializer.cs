@@ -12,7 +12,7 @@ namespace GraphLib.Domain.Serializers
 
         public T Deserialize(string json)
         {
-            using (var mmemoryStream = new MemoryStream(Encoding.Unicode.GetBytes(json)))
+            using (var mmemoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
             {
                 return (T)_serializer.ReadObject(mmemoryStream);
             }
@@ -25,8 +25,9 @@ namespace GraphLib.Domain.Serializers
             using (var memoryStream = new MemoryStream())
             {
                 _serializer.WriteObject(memoryStream, obj);
-                json = Encoding.Unicode.GetString(memoryStream.ToArray());
+                json = Encoding.UTF8.GetString(memoryStream.ToArray());
             }
+
             return json;
         }
     }

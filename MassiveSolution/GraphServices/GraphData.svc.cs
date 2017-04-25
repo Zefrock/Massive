@@ -22,6 +22,7 @@ namespace GraphServices
         public void LoadGraph(IEnumerable<string> graph)
         {
             var graphDTO = Graph.LoadFrom(graph);
+            Graph.Persist();
         }
     }
 }

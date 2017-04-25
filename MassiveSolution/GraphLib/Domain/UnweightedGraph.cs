@@ -35,14 +35,14 @@ namespace GraphLib.Domain
         /// <returns></returns>
         public GraphDTO LoadFromDB()
         {
-            List<Node> dbNodes = null;
+            List<NodeDTO> dtos;
 
             using (var context = new GraphDBContext())
             {
-                dbNodes = context.Set<Node>().ToList();
+                List<Node> dbNodes = context.Set<Node>().ToList();
+                dtos = Mapper.Map<List<Node>, List<NodeDTO>>(dbNodes);
             }
 
-            List<NodeDTO> dtos = Mapper.Map<List<Node>, List<NodeDTO>>(dbNodes);
             GraphIntance = new GraphDTO(dtos);
 
             return GraphIntance;
@@ -54,6 +54,7 @@ namespace GraphLib.Domain
         /// <param name="nodes"></param>
         public GraphDTO LoadFrom(IEnumerable<string> nodes)
         {
+            //Read the serialized nodes
             List<NodeDTO> graphNodes = new List<NodeDTO>();
 
             foreach (var node in nodes)
@@ -74,13 +75,16 @@ namespace GraphLib.Domain
 
             //Validate for duplicate
             //Assuming it's not acceptable to have the same node (nodeID) defined twice
-            var duplicates = graphNodes
-                .GroupBy(n => n.NodeId)
-                .Where(g => g.Count() > 1)
-                .ToList();
+            if (graphNodes.GroupBy(n => n.NodeId).Any(g => g.Count() > 1))
+            {
+                string duplicatedIds = graphNodes
+                    .GroupBy(n => n.NodeId)
+                    .Where(g => g.Count() > 1)
+                    .Select(g => g.Key.ToString())
+                    .Aggregate((a, b) => a + ", " + b);
 
-            if (duplicates.Count() > 0)
-                throw new Exception($"Found duplicated node definitions for nodes with IDs : { duplicates.Select(g => g.Key.ToString()).Aggregate((a, b) => a + ", " + b)}");
+                throw new Exception($"Found duplicated node definitions for nodes with IDs : {duplicatedIds}");
+            }
 
             GraphIntance = new GraphDTO(graphNodes);
 
