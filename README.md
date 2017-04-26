@@ -23,9 +23,9 @@ The loader uses [DataManagent](http://localhost/GraphData.svc) service to load n
 
 ### Services
 Three services are spawned (adjust urls to assigned port when debugging)
-[API](http://localhost/GraphApi.svc)
-[DataManagent](http://localhost/GraphData.svc)
-[Domain](http://localhost/GraphDomain.svc) (Not implemented)
+[API](http://localhost/GraphApi.svc) *This should be an ASP.NET Web Apllication project Web, API*
+[DataManagent](http://localhost/GraphData.svc) 
+[Domain](http://localhost/GraphDomain.svc) *independent ASP.NET WCF service, Not implemented*
 
 ### What is missing
 It's sad but I really couldn't not finish all tasks in the assignment.
